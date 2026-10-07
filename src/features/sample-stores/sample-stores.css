@@ -2,7 +2,7 @@
 .ss-root {
     --ss-brand: #5b3f8c;
     --ss-brand-2: #8064a8;
-    --ss-brand-3:#D2C5F5 ;
+    --ss-brand-3: #d2c5f5;
     --ss-soft: #e9e1f3;
     --ss-softer: #f6f2fa;
     --ss-ink: #111111;
@@ -34,10 +34,6 @@
 .ss-root *::after {
     box-sizing: border-box;
 }
-
-* { box-sizing: border-box; }
-html, body, #root { margin: 0; padding: 0; width: 100%; max-width: none; }
-body { display: block; background: #fff; font-family: Vazirmatn, Tahoma, sans-serif; }
 
 .ss-root a {
     color: inherit;
@@ -249,7 +245,7 @@ body { display: block; background: #fff; font-family: Vazirmatn, Tahoma, sans-se
     color: var(--ss-muted);
 }
 
-/* ================= باکس آبی (لیست همه فروشگاه‌ها) ================= */
+/* ================= باکس لیست همه فروشگاه‌ها ================= */
 .ss-section {
     margin: 24px 16px 0;
     padding: 24px 20px;
@@ -264,6 +260,7 @@ body { display: block; background: #fff; font-family: Vazirmatn, Tahoma, sans-se
     font-size: 18px;
     font-weight: 800;
 }
+
 /* ================= باکس معرفی (بنفش حبابی) ================= */
 .ss-intro {
     position: relative;
@@ -337,14 +334,13 @@ body { display: block; background: #fff; font-family: Vazirmatn, Tahoma, sans-se
     line-height: 1.9;
     opacity: 0.9;
 }
+
 /* ================= کاروسل (موبایل) ================= */
 .ss-carousel {
     position: relative;
-
 }
 
 .ss-track {
-
     display: flex;
     gap: 12px;
     overflow-x: auto;
@@ -366,6 +362,7 @@ body { display: block; background: #fff; font-family: Vazirmatn, Tahoma, sans-se
     scroll-snap-stop: always;
 }
 
+/* فلش‌ها (بدون SVG، با CSS) */
 .ss-arrow {
     position: absolute;
     top: 40%;
@@ -378,12 +375,39 @@ body { display: block; background: #fff; font-family: Vazirmatn, Tahoma, sans-se
     padding: 0;
     border: 1px solid var(--ss-line);
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.95);
-    color: var(--ss-brand);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    background: #fff;
+    color: #5b3f8c;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     cursor: pointer;
     transform: translateY(-50%);
     transition: opacity 0.2s, transform 0.15s;
+}
+
+.ss-arrow svg {
+    display: none;
+}
+
+.ss-arrow::before {
+    content: '';
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-style: solid;
+    border-color: #5b3f8c;
+}
+
+/* فلش سمت راست (قبلی): به سمت راست */
+.ss-arrow--prev::before {
+    border-width: 3px 3px 0 0;
+    transform: rotate(45deg);
+    margin-right: 4px;
+}
+
+/* فلش سمت چپ (بعدی): به سمت چپ */
+.ss-arrow--next::before {
+    border-width: 0 0 3px 3px;
+    transform: rotate(45deg);
+    margin-left: 4px;
 }
 
 .ss-arrow:active {
@@ -605,12 +629,14 @@ body { display: block; background: #fff; font-family: Vazirmatn, Tahoma, sans-se
     line-height: 1.9;
     color: var(--ss-muted);
 }
-.ss-cta-btn{
+
+.ss-cta-btn {
     display: flex;
     flex-direction: row;
-    gap:15px;
+    gap: 15px;
     justify-content: center;
 }
+
 .ss-cta a {
     display: inline-block;
     padding: 11px 24px;
@@ -687,6 +713,21 @@ body { display: block; background: #fff; font-family: Vazirmatn, Tahoma, sans-se
         font-size: 14px;
     }
 
+    .ss-intro {
+        margin: 32px 24px 20px;
+        padding: 32px 40px;
+        border-radius: 32px;
+    }
+
+    .ss-intro__title {
+        font-size: 26px;
+    }
+
+    .ss-intro__text {
+        max-width: 640px;
+        font-size: 15px;
+    }
+
     .ss-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -718,20 +759,6 @@ body { display: block; background: #fff; font-family: Vazirmatn, Tahoma, sans-se
 
     .ss-cta a {
         padding: 13px 32px;
-        font-size: 15px;
-    }
-    .ss-intro {
-        margin: 32px 24px 20px;
-        padding: 32px 40px;
-        border-radius: 32px;
-    }
-
-    .ss-intro__title {
-        font-size: 26px;
-    }
-
-    .ss-intro__text {
-        max-width: 640px;
         font-size: 15px;
     }
 }

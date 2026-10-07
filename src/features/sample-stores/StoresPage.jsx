@@ -43,7 +43,7 @@ export default function StoresPage({ onBack = () => window.history.back() }) {
                     aria-label="بازگشت"
                 >
                     <img
-                        src={`${import.meta.env.BASE_URL}black-icon.png`}
+                        src={`${import.meta.env.BASE_URL}favicon.png`}
                         alt=""
                         className="ss-back__img"
                         width="24"
@@ -76,7 +76,7 @@ export default function StoresPage({ onBack = () => window.history.back() }) {
                     <>
                         <StoresCarousel stores={STORES} />
 
-                        <section className="ss-section">
+                        {/* <section className="ss-section">
                             <h2 className="ss-section__title">{BRAND.allStoresTitle}</h2>
                             <ul className="ss-list">
                                 {STORES.map((store) => (
@@ -102,7 +102,7 @@ export default function StoresPage({ onBack = () => window.history.back() }) {
                                     </li>
                                 ))}
                             </ul>
-                        </section>
+                        </section> */}
                     </>
                 )}
 

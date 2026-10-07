@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import StoreCard from './StoreCard';
-import { ChevronLeftIcon, ChevronRightIcon } from './icons';
 
 export default function StoresCarousel({ stores }) {
     const trackRef = useRef(null);
@@ -55,9 +54,8 @@ export default function StoresCarousel({ stores }) {
                 onClick={goPrev}
                 disabled={active === 0}
                 aria-label="فروشگاه قبلی"
-            >
-                <ChevronRightIcon />
-            </button>
+            />
+
 
             <button
                 type="button"
@@ -65,9 +63,7 @@ export default function StoresCarousel({ stores }) {
                 onClick={goNext}
                 disabled={active === last}
                 aria-label="فروشگاه بعدی"
-            >
-                <ChevronLeftIcon />
-            </button>
+            />
 
             <div className="ss-track" ref={trackRef}>
                 {stores.map((store) => (
