@@ -323,14 +323,14 @@
 
 .ss-intro__title {
     margin: 0;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 900;
     line-height: 1.6;
 }
 
 .ss-intro__text {
     margin: 6px 0 0;
-    font-size: 13px;
+    font-size: 12px;
     line-height: 1.9;
     opacity: 0.9;
 }
@@ -652,6 +652,264 @@
     transform: scale(0.95);
 }
 
+/* ================= فوتر ================= */
+.ss-footer {
+    position: relative;
+    overflow: hidden;
+    margin-top: 8px;
+    padding: 32px 16px 0;
+    border-radius: 28px 28px 0 0;
+    background: linear-gradient(160deg, #2c1d4b, #3f2a68 45%, var(--ss-brand));
+    color: rgba(255, 255, 255, 0.82);
+}
+
+.ss-footer::before {
+    content: "";
+    position: absolute;
+    inset-inline-start: -80px;
+    top: -80px;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: rgba(210, 197, 245, 0.12);
+    pointer-events: none;
+}
+
+.ss-footer__inner {
+    position: relative;
+    display: grid;
+    gap: 28px;
+    max-width: 1100px;
+    margin-inline: auto;
+}
+
+.ss-footer__logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 900;
+}
+
+.ss-footer__logo-mark {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #000;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.ss-footer__logo-mark img {
+    display: block;
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
+}
+
+.ss-footer__about {
+    max-width: 380px;
+    margin: 12px 0 0;
+    font-size: 12px;
+    line-height: 2;
+}
+
+.ss-footer__heading {
+    margin: 0 0 12px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.ss-footer__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.ss-root .ss-footer__links a {
+    display: inline-block;
+    padding: 7px 14px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    font-size: 12px;
+    transition: background 0.15s;
+}
+
+.ss-root .ss-footer__links a:hover {
+    background: rgba(255, 255, 255, 0.16);
+    color: #fff;
+}
+
+.ss-footer__trust {
+    display: inline-flex;
+    padding: 10px;
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+}
+
+.ss-footer__trust a,
+.ss-footer__trust img {
+    display: block;
+}
+
+.ss-footer__trust img {
+    width: 96px;
+    height: auto;
+    min-height: 96px;
+}
+
+.ss-footer__bottom {
+    position: relative;
+    max-width: 1100px;
+    margin: 28px auto 0;
+    padding: 16px 0 calc(16px + env(safe-area-inset-bottom));
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    font-size: 11px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* ================= حلقه‌ی محصولات ================= */
+@keyframes ss-ring-spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+@keyframes ss-ring-pulse {
+    0%, 100% { box-shadow: 0 10px 28px rgba(91, 63, 140, 0.35), 0 0 0 0 rgba(128, 100, 168, 0.45); }
+    50%      { box-shadow: 0 10px 28px rgba(91, 63, 140, 0.35), 0 0 0 12px rgba(128, 100, 168, 0); }
+}
+
+.ss-ring {
+    position: relative;
+    margin: 32px 16px 0;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.ss-ring.is-visible {
+    opacity: 1;
+    transform: none;
+}
+
+.ss-ring__title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 900;
+    color: var(--ss-ink);
+}
+
+.ss-ring__text {
+    max-width: 420px;
+    margin: 6px auto 0;
+    font-size: 12px;
+    line-height: 1.9;
+    color: var(--ss-muted);
+}
+
+.ss-ring__circle {
+    position: relative;
+    width: min(92%, 360px);
+    aspect-ratio: 1;
+    margin: 12px auto 0;
+    border-radius: 50%;
+    /* هاله‌ی ملایم بنفش پشت حلقه */
+    background: radial-gradient(circle, var(--ss-softer) 0%, var(--ss-softer) 45%, transparent 70%);
+    transform: scale(0.85);
+    transition: transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) 0.1s;
+}
+
+.ss-ring.is-visible .ss-ring__circle {
+    transform: scale(1);
+}
+
+.ss-ring__spin {
+    position: absolute;
+    inset: 0;
+    animation: ss-ring-spin 60s linear infinite;
+    will-change: transform;
+    backface-visibility: hidden;
+}
+
+.ss-ring__spin img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.ss-ring__center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 62%;
+    transform: translate(-50%, -50%);
+}
+
+.ss-root .ss-ring__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 20px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--ss-brand-2), var(--ss-brand) 60%, #3f2a68);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 900;
+    white-space: nowrap;
+    animation: ss-ring-pulse 2.4s ease-in-out infinite;
+    transition: transform 0.15s;
+}
+
+.ss-ring__btn svg {
+    transition: transform 0.2s;
+}
+
+.ss-ring__btn:hover svg {
+    transform: translateX(-4px);
+}
+
+.ss-ring__btn:active {
+    transform: scale(0.95);
+}
+
+.ss-ring__badge {
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--ss-soft);
+    background: rgba(255, 255, 255, 0.92);
+    color: var(--ss-muted);
+    font-size: 10px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ss-ring,
+    .ss-ring__circle {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+    .ss-ring__spin,
+    .ss-root .ss-ring__btn {
+        animation: none;
+    }
+}
+
 /* ================= دسکتاپ (بر اساس عرض خود کامپوننت) ================= */
 @container ss-page (min-width: 768px) {
     .ss-topbar {
@@ -766,5 +1024,67 @@
 @container ss-page (min-width: 1000px) {
     .ss-grid {
         grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@container ss-page (min-width: 768px) {
+    .ss-footer {
+        margin-top: 16px;
+        padding: 48px max(24px, calc((100% - 1100px) / 2)) 0;
+        border-radius: 40px 40px 0 0;
+    }
+
+    .ss-footer__inner {
+        grid-template-columns: 2fr 1.2fr auto;
+        gap: 48px;
+        padding-inline: 24px;
+    }
+
+    .ss-footer__about {
+        font-size: 13px;
+    }
+
+    .ss-footer__links {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .ss-footer__bottom {
+        margin-inline: 24px;
+        font-size: 12px;
+    }
+}
+
+@container ss-page (min-width: 768px) {
+    .ss-ring {
+        margin: 56px 24px 0;
+    }
+
+    .ss-ring__title {
+        font-size: 28px;
+    }
+
+    .ss-ring__text {
+        max-width: 560px;
+        font-size: 15px;
+    }
+
+    .ss-ring__circle {
+        width: min(80%, 560px);
+        margin-top: 16px;
+    }
+
+    .ss-ring__center {
+        gap: 12px;
+    }
+
+    .ss-root .ss-ring__btn {
+        padding: 15px 30px;
+        font-size: 16px;
+    }
+
+    .ss-ring__badge {
+        padding: 5px 14px;
+        font-size: 12px;
     }
 }

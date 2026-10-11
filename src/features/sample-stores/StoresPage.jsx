@@ -3,6 +3,8 @@ import './sample-stores.css';
 import PromoBanner from './PromoBanner';
 import StoresCarousel from './StoresCarousel';
 import StoreCard from './StoreCard';
+import Footer from './Footer';
+import ProductRing from './ProductRing';
 import { ChevronLeftIcon } from './icons';
 import { BRAND, STORES } from './stores.config';
 
@@ -58,7 +60,7 @@ export default function StoresPage({ onBack = () => window.history.back() }) {
                 <PromoBanner isDesktop={isDesktop} />
 
                 {/* باکس معرفی بنفش حبابی */}
-                <section className="ss-intro">
+                <section className="ss-intro" id="stores">
                     <span className="ss-intro__tag">{BRAND.promoTag}</span>
                     <h2 className="ss-intro__title">{BRAND.storesTitle}</h2>
                     <p className="ss-intro__text">{BRAND.storesText}</p>
@@ -106,6 +108,9 @@ export default function StoresPage({ onBack = () => window.history.back() }) {
                     </>
                 )}
 
+                {/* حلقه‌ی چرخان محصولات + دکمه ساخت فروشگاه */}
+                <ProductRing />
+
                 <section className="ss-cta">
                     <h2>{BRAND.ctaTitle}</h2>
                     <p>{BRAND.ctaText}</p>
@@ -113,12 +118,14 @@ export default function StoresPage({ onBack = () => window.history.back() }) {
                     <a href={BRAND.ctaUrl} target="_blank" rel="noopener noreferrer">
                         {BRAND.ctaLabel}
                     </a>
-                    <a href={BRAND.ctaUrl} target="_blank" rel="noopener noreferrer">
+                    <a href={BRAND.backUrl}>
                         {BRAND.ctaBack}
                     </a>
                     </div>
                 </section>
             </main>
+
+            <Footer />
         </div>
     );
 }

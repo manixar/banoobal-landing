@@ -19,12 +19,36 @@ export const BRAND = {
         'نمونه‌هایی از فروشگاه‌های ساخته‌شده با بیش از ۴ قالب فروشگاه‌ساز بانوبال. برای دیدن هر فروشگاه روی آن بزنید و با امکانات فروشگاه ها آشنا بشید.',
     allStoresTitle: 'همه فروشگاه‌ها',
 
-    // کارت پایین صفحه (و لینک دکمه‌ی بنر)
+
     ctaTitle: 'فروشگاه آنلاین خودتان را بسازید',
     ctaText: 'با فروشگاه‌ساز بانوبال در چند قدم فروشگاه‌تان آماده می‌شود.',
     ctaLabel: 'ساخت فروشگاه',
     ctaBack: 'بازگشت به صفحه اصلی',
     ctaUrl: 'https://paanapay.com/Auth/login',
+    backUrl: 'https://banoobal.com/',
+
+    // سکشن حلقه‌ی محصولات
+    ringTitle: 'می‌خوای چی بفروشی؟',
+    ringText: 'هر محصولی که داری، با بانوبال در چند قدم فروشگاه آنلاینش را بساز.',
+    ringButton: 'فروشگاهتو بساز',
+    ringBadge: 'پشتیبانی ۲۴/۷ • همراه با پنل مدیریت',
+
+    // فوتر
+    footerAbout:
+        'بانوبال فروشگاه‌سازی ساده و سریع برای کسب‌وکارهای آنلاین است؛ فروشگاه‌تان را در چند قدم بسازید و فروش را شروع کنید.',
+    footerLinks: [
+        { label: 'ساخت فروشگاه', href: 'https://paanapay.com/Auth/login', external: true },
+        { label: 'فروشگاه‌های نمونه', href: '#stores' },
+    ],
+};
+
+
+export const ENAMAD = {
+    id: '7866170',
+    code: 'e5OKVvGQSfoRCRaHK0dTubzdOJunHhnD',
+
+    demo: true,
+    demoImage: 'enamad-demo.png',
 };
 export const STORES = [
     {
