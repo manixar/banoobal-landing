@@ -1,10 +1,14 @@
 /* ================= پالت و پایه ================= */
 .ss-root {
-    --ss-brand: #5b3f8c;
-    --ss-brand-2: #8064a8;
-    --ss-brand-3: #d2c5f5;
-    --ss-soft: #e9e1f3;
-    --ss-softer: #f6f2fa;
+    /* تم رنگی: مرجانی #f28b82 */
+    --ss-brand: #c55d56;        /* رنگ اصلی */
+    --ss-brand-2: #f7aca5;      /* روشن‌تر */
+    --ss-brand-3: #fcd6d2;
+    --ss-brand-deep: #f28b82;   /* دکمه‌ها و پس‌زمینه‌هایی که متن سفید دارند */
+    --ss-brand-darker: #f28b82; /* شروع گرادیان‌های تیره */
+    --ss-brand-ink: #b8453c;    /* متن رنگی روی زمینه‌ی سفید */
+    --ss-soft: #fde2df;
+    --ss-softer: #fff5f4;
     --ss-ink: #111111;
     --ss-muted: #6f6f6f;
     --ss-line: #e8e8e8;
@@ -131,8 +135,8 @@
     padding: 18px 16px;
     border-radius: 24px;
     color: #fff;
-    background: linear-gradient(135deg, #3f2a68, var(--ss-brand) 55%, var(--ss-brand-2));
-    box-shadow: 0 8px 20px rgba(91, 63, 140, 0.25);
+    background: linear-gradient(135deg, var(--ss-brand-darker), var(--ss-brand-deep) 55%, var(--ss-brand));
+    box-shadow: 0 8px 20px rgba(212, 87, 78, 0.25);
 }
 
 .ss-promo::before,
@@ -221,7 +225,7 @@
     padding: 8px 14px;
     border-radius: 999px;
     background: #fff;
-    color: var(--ss-brand);
+    color: var(--ss-brand-ink);
     font-size: 12px;
     font-weight: 800;
     transition: transform 0.15s;
@@ -268,10 +272,12 @@
     margin: 24px 16px 12px;
     padding: 22px 20px;
     border-radius: 24px;
-    color: #fff;
+    color: var(--ss-ink);
     text-align: right;
-    background: linear-gradient(135deg, #3f2a68, var(--ss-brand) 55%, var(--ss-brand-2));
-    box-shadow: 0 8px 20px rgba(91, 63, 140, 0.25);
+    /* باکس روشن تا با بنر رنگی بالایش رقابت نکند */
+    background: linear-gradient(135deg, #fff 0%, var(--ss-softer) 55%, var(--ss-soft) 100%);
+    border: 1px solid var(--ss-soft);
+    box-shadow: 0 6px 18px rgba(212, 87, 78, 0.08);
 }
 
 .ss-intro::before,
@@ -279,9 +285,11 @@
     content: '';
     position: absolute;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(242, 139, 130, 0.12);
     pointer-events: none;
 }
+
+
 
 .ss-intro::before {
     width: 150px;
@@ -308,7 +316,9 @@
     margin-bottom: 10px;
     padding: 3px 10px;
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.16);
+    background: #fff;
+    border: 1px solid var(--ss-soft);
+    color: var(--ss-brand-ink);
     font-size: 11px;
     font-weight: 700;
 }
@@ -318,21 +328,24 @@
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: #ffd75e;
+    background: var(--ss-brand);
 }
 
 .ss-intro__title {
     margin: 0;
+    padding-right: 12px;
+    border-right: 4px solid var(--ss-brand);
     font-size: 16px;
     font-weight: 900;
     line-height: 1.6;
+    color: var(--ss-ink);
 }
 
 .ss-intro__text {
     margin: 6px 0 0;
-    font-size: 12px;
+    font-size: 15px;
     line-height: 1.9;
-    opacity: 0.9;
+    color: var(--ss-muted);
 }
 
 /* ================= کاروسل (موبایل) ================= */
@@ -359,7 +372,7 @@
 .ss-slide {
     flex: 0 0 78%;
     scroll-snap-align: center;
-    scroll-snap-stop: always;
+    scroll-snap-stop: normal;
 }
 
 /* فلش‌ها (بدون SVG، با CSS) */
@@ -376,7 +389,7 @@
     border: 1px solid var(--ss-line);
     border-radius: 50%;
     background: #fff;
-    color: #5b3f8c;
+    color: var(--ss-brand-ink);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     cursor: pointer;
     transform: translateY(-50%);
@@ -393,7 +406,7 @@
     width: 10px;
     height: 10px;
     border-style: solid;
-    border-color: #5b3f8c;
+    border-color: var(--ss-brand-ink);
 }
 
 /* فلش سمت راست (قبلی): به سمت راست */
@@ -460,7 +473,7 @@
     border: 1px solid var(--ss-line);
     border-radius: 20px;
     background: #fff;
-    box-shadow: 0 2px 10px rgba(91, 63, 140, 0.08);
+    box-shadow: 0 2px 10px rgba(212, 87, 78, 0.08);
     transition: transform 0.15s, box-shadow 0.2s;
 }
 
@@ -620,7 +633,7 @@
     margin: 0;
     font-size: 16px;
     font-weight: 900;
-    color: var(--ss-brand);
+    color: var(--ss-brand-ink);
 }
 
 .ss-cta p {
@@ -641,7 +654,7 @@
     display: inline-block;
     padding: 11px 24px;
     border-radius: 999px;
-    background: var(--ss-brand);
+    background: linear-gradient(135deg, var(--ss-brand), var(--ss-brand-deep));
     color: #fff;
     font-size: 13px;
     font-weight: 800;
@@ -652,15 +665,15 @@
     transform: scale(0.95);
 }
 
-/* ================= فوتر ================= */
+/*  فوتر  */
 .ss-footer {
     position: relative;
     overflow: hidden;
     margin-top: 8px;
     padding: 32px 16px 0;
     border-radius: 28px 28px 0 0;
-    background: linear-gradient(160deg, #2c1d4b, #3f2a68 45%, var(--ss-brand));
-    color: rgba(255, 255, 255, 0.82);
+    background: linear-gradient(160deg, #8f3029, var(--ss-brand-darker) 45%, var(--ss-brand-deep));
+    color: #000;
 }
 
 .ss-footer::before {
@@ -671,7 +684,7 @@
     width: 220px;
     height: 220px;
     border-radius: 50%;
-    background: rgba(210, 197, 245, 0.12);
+    background: rgba(255, 214, 209, 0.14);
     pointer-events: none;
 }
 
@@ -687,7 +700,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    color: #fff;
+    color: #000;
     font-size: 16px;
     font-weight: 900;
 }
@@ -695,11 +708,9 @@
 .ss-footer__logo-mark {
     display: grid;
     place-items: center;
-    width: 40px;
+    width: 50px;
     height: 40px;
     border-radius: 50%;
-    background: #000;
-    border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .ss-footer__logo-mark img {
@@ -711,14 +722,73 @@
 
 .ss-footer__about {
     max-width: 380px;
-    margin: 12px 0 0;
-    font-size: 12px;
+    margin: 0 0 6px;
+    font-size: 13px;
     line-height: 2;
+}
+
+.ss-footer__logo .ss-footer__heading {
+    margin: 0;
+}
+
+.ss-footer__logo {
+    margin-bottom: 12px;
+}
+
+.ss-footer__contact {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 13px;
+}
+
+.ss-footer__contact li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+}
+
+.ss-footer__contact svg {
+    flex-shrink: 0;
+}
+
+.ss-root .ss-footer__contact a {
+    color: inherit;
+    font-weight: 700;
+}
+
+.ss-root .ss-footer__contact a:hover {
+    text-decoration: underline;
+}
+
+.ss-footer__socials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+}
+
+.ss-root .ss-footer__socials a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    color: inherit;
+    font-size: 12px;
+    transition: background 0.15s;
+}
+
+.ss-root .ss-footer__socials a:hover {
+    background: rgba(255, 255, 255, 0.55);
 }
 
 .ss-footer__heading {
     margin: 0 0 12px;
-    color: #fff;
+    color: #000;
     font-size: 14px;
     font-weight: 800;
 }
@@ -771,7 +841,7 @@
     border-top: 1px solid rgba(255, 255, 255, 0.12);
     font-size: 11px;
     text-align: center;
-    color: rgba(255, 255, 255, 0.6);
+    color: #000;
 }
 
 /* ================= حلقه‌ی محصولات ================= */
@@ -781,8 +851,8 @@
 }
 
 @keyframes ss-ring-pulse {
-    0%, 100% { box-shadow: 0 10px 28px rgba(91, 63, 140, 0.35), 0 0 0 0 rgba(128, 100, 168, 0.45); }
-    50%      { box-shadow: 0 10px 28px rgba(91, 63, 140, 0.35), 0 0 0 12px rgba(128, 100, 168, 0); }
+    0%, 100% { box-shadow: 0 10px 28px rgba(212, 87, 78, 0.35), 0 0 0 0 rgba(242, 139, 130, 0.45); }
+    50%      { box-shadow: 0 10px 28px rgba(212, 87, 78, 0.35), 0 0 0 12px rgba(242, 139, 130, 0); }
 }
 
 .ss-ring {
@@ -864,7 +934,7 @@
     gap: 6px;
     padding: 12px 20px;
     border-radius: 999px;
-    background: linear-gradient(135deg, var(--ss-brand-2), var(--ss-brand) 60%, #3f2a68);
+    background: linear-gradient(135deg, var(--ss-brand), var(--ss-brand-deep) 60%, var(--ss-brand-darker));
     color: #fff;
     font-size: 13px;
     font-weight: 900;
@@ -978,12 +1048,12 @@
     }
 
     .ss-intro__title {
-        font-size: 26px;
+        font-size: 20px;
     }
 
     .ss-intro__text {
-        max-width: 640px;
-        font-size: 15px;
+        max-width: 940px;
+        font-size: 20px;
     }
 
     .ss-grid {
@@ -999,7 +1069,7 @@
 
     .ss-card:hover {
         transform: translateY(-4px);
-        box-shadow: 0 12px 28px rgba(91, 63, 140, 0.18);
+        box-shadow: 0 12px 28px rgba(212, 87, 78, 0.18);
     }
 
     .ss-cta {
@@ -1035,7 +1105,7 @@
     }
 
     .ss-footer__inner {
-        grid-template-columns: 2fr 1.2fr auto;
+        grid-template-columns: 1.2fr 1.2fr auto;
         gap: 48px;
         padding-inline: 24px;
     }
@@ -1086,5 +1156,43 @@
     .ss-ring__badge {
         padding: 5px 14px;
         font-size: 12px;
+    }
+}
+
+/* ===== اسلایدر فروشگاه‌ها در دسکتاپ ===== */
+@container ss-page (min-width: 768px) {
+    .ss-carousel {
+        margin: 0 24px;
+    }
+
+    .ss-track {
+        gap: 20px;
+        padding: 8px 0 12px;
+        scroll-padding-inline: 0;
+    }
+
+    .ss-slide {
+        flex: 0 0 calc((100% - 3 * 20px) / 4); /* ۴ کارت با ۳ فاصله‌ی ۲۰ پیکسلی */
+        scroll-snap-align: start;
+    }
+
+    .ss-arrow {
+        width: 44px;
+        height: 44px;
+    }
+
+    .ss-arrow--prev {
+        right: -22px;
+    }
+
+    .ss-arrow--next {
+        left: -22px;
+    }
+}
+
+/* تبلت (۷۶۸ تا ۹۹۹ پیکسل): ۳ کارت */
+@container ss-page (min-width: 768px) and (max-width: 999px) {
+    .ss-slide {
+        flex-basis: calc((100% - 2 * 20px) / 3);
     }
 }

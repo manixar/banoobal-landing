@@ -1,3 +1,4 @@
+@import './fonts/estedad.css';
 
 
 *
@@ -8,5 +9,5 @@ html, body, #root {
     margin: 0; padding: 0; width: 100%; max-width: none;
 }
 body {
-    display: block; background: #fff; font-family: Vazirmatn, Tahoma, sans-serif;
+    display: block; background: #fff; font-family: 'Estedad', Tahoma, sans-serif;
 }

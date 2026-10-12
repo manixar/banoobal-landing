@@ -2,10 +2,8 @@ import { useLayoutEffect, useRef, useState } from 'react';
 import './sample-stores.css';
 import PromoBanner from './PromoBanner';
 import StoresCarousel from './StoresCarousel';
-import StoreCard from './StoreCard';
 import Footer from './Footer';
 import ProductRing from './ProductRing';
-import { ChevronLeftIcon } from './icons';
 import { BRAND, STORES } from './stores.config';
 
 const DESKTOP_MIN_WIDTH = 768;
@@ -66,47 +64,7 @@ export default function StoresPage({ onBack = () => window.history.back() }) {
                     <p className="ss-intro__text">{BRAND.storesText}</p>
                 </section>
 
-                {isDesktop ? (
-                    /* دسکتاپ: همه‌ی فروشگاه‌ها در یک گرید */
-                    <div className="ss-grid">
-                        {STORES.map((store) => (
-                            <StoreCard key={store.url} store={store} />
-                        ))}
-                    </div>
-                ) : (
-                    /* موبایل: کاروسل + لیست */
-                    <>
-                        <StoresCarousel stores={STORES} />
-
-                        {/* <section className="ss-section">
-                            <h2 className="ss-section__title">{BRAND.allStoresTitle}</h2>
-                            <ul className="ss-list">
-                                {STORES.map((store) => (
-                                    <li key={store.url}>
-                                        <a
-                                            className="ss-row"
-                                            href={store.url}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                        >
-                                            <img
-                                                className="ss-row__img"
-                                                src={`${import.meta.env.BASE_URL}${store.preview}`}
-                                                alt=""
-                                                loading="lazy"
-                                            />
-                                            <span className="ss-row__text">
-                        <strong>{store.name}</strong>
-                        <span>{store.category}</span>
-                      </span>
-                                            <ChevronLeftIcon className="ss-row__arrow" />
-                                        </a>
-                                    </li>
-                                ))}
-                            </ul>
-                        </section> */}
-                    </>
-                )}
+                <StoresCarousel stores={STORES} />
 
                 {/* حلقه‌ی چرخان محصولات + دکمه ساخت فروشگاه */}
                 <ProductRing />
