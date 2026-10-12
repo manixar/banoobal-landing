@@ -1,11 +1,11 @@
 export const BRAND = {
     pageTitle: 'فروشگاه‌ساز بانوبال',
-    bannerMobile: 'banner/hero-banner-mobile.png',
-    bannerDesktop: 'banner/hero-banner-desktop.png',
+    bannerMobile: 'banner/hero-banner.png',
+    bannerDesktop: 'banner/hero-banner.png',
     bannerAlt: 'فروشگاه‌ساز بانوبال',
 
     // بنر بالای صفحه
-    promoTag: 'فروشگاه‌ساز ',
+    promoTag: 'فروشگاه‌ساز بانوبال',
     promoTitleStart: '',
     promoTitleHighlight: '',
     promoTitleEnd: '',
@@ -14,7 +14,7 @@ export const BRAND = {
 
 
     // بخش فروشگاه‌ها
-    storesTitle: 'فروشگاه‌های نمونه بانوبال',
+    storesTitle: 'رویای خود را بساز و با دنیا به اشتراک بگذار',
     storesText:
         'نمونه‌هایی از فروشگاه‌های ساخته‌شده با بیش از ۴ قالب فروشگاه‌ساز بانوبال. برای دیدن هر فروشگاه روی آن بزنید و با امکانات فروشگاه ها آشنا بشید.',
     allStoresTitle: 'همه فروشگاه‌ها',
@@ -34,12 +34,23 @@ export const BRAND = {
     ringBadge: 'پشتیبانی ۲۴/۷ • همراه با پنل مدیریت',
 
     // فوتر
-    footerAbout:
-        'بانوبال فروشگاه‌سازی ساده و سریع برای کسب‌وکارهای آنلاین است؛ فروشگاه‌تان را در چند قدم بسازید و فروش را شروع کنید.',
-    footerLinks: [
-        { label: 'ساخت فروشگاه', href: 'https://paanapay.com/Auth/login', external: true },
-        { label: 'فروشگاه‌های نمونه', href: '#stores' },
+    footerContactTitle: 'با ما در ارتباط باشید!',
+    supportPhone: '09101019211',            // برای لینک تماس (اعداد انگلیسی)
+    supportPhoneLabel: '۰۹۱۰۱۰۱۹۲۱۱',       // نمایش در صفحه
+    supportEmail: 'info@banoobal.com',
+    // لینک شبکه‌های اجتماعی؛ هر کدام خالی باشد نمایش داده نمی‌شود
+    socials: [
+        { name: 'instagram', label: 'اینستاگرام', href: '' },
+        { name: 'telegram', label: 'تلگرام', href: '' },
     ],
+
+    footerAboutTitle: 'درباره بانوبال',
+    footerAboutLines: [
+        'بانوبال، از یادگیری تا درآمد',
+        'یادگیری مهارت ← تمرین عملی ← ورود به بازار',
+    ],
+
+    enamadTitle: 'اینماد بانوبال',
 };
 
 
@@ -48,7 +59,7 @@ export const ENAMAD = {
     code: 'e5OKVvGQSfoRCRaHK0dTubzdOJunHhnD',
 
     demo: true,
-    demoImage: 'enamad-demo.png',
+    demoImage: 'enamad/enamad.png', // عکس اینماد ذخیره‌شده‌ی خودت
 };
 export const STORES = [
     {
