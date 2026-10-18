@@ -1,7 +1,7 @@
 export const BRAND = {
     pageTitle: 'فروشگاه‌ساز بانوبال',
-    bannerMobile: 'banner/hero-banner.png',
-    bannerDesktop: 'banner/hero-banner.png',
+    bannerMobile: 'banner/banoobalshop_banner.png',
+    bannerDesktop: 'banner/banoobalshop_banner.png',
     bannerAlt: 'فروشگاه‌ساز بانوبال',
 
     // بنر بالای صفحه
