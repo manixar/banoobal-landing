@@ -13,12 +13,6 @@ const icon = {
     width: 18, height: 18, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor',
     strokeWidth: 2, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': 'true',
 };
-const BagIcon = (p) => (
-    <svg {...icon} {...p}>
-        <path d="M6 7h12l1 13H5z" />
-        <path d="M9 7a3 3 0 0 1 6 0" />
-    </svg>
-);
 const HeadsetIcon = (p) => (
     <svg {...icon} {...p}>
         <path d="M4 14v-2a8 8 0 0 1 16 0v2" />
@@ -132,10 +126,6 @@ export default function LoginPage() {
     return (
         <div className="lg-root">
             <header className="lg-header">
-                <a href="#/" className="lg-brand" aria-label={`بازگشت به صفحه‌ی اصلی ${BRAND_NAME}`}>
-                    <span className="lg-brand__icon"><BagIcon width={16} height={16} /></span>
-                    {BRAND_NAME}
-                </a>
                 <a href={`tel:${BRAND.supportPhone}`} className="lg-support">
                     <HeadsetIcon width={16} height={16} />
                     پشتیبانی
@@ -158,7 +148,7 @@ export default function LoginPage() {
                             {isRegister ? 'ساخت حساب کاربری' : 'ورود به حساب کاربری'}
                         </span>
                         <h1 className="lg-title">
-                            به فروشگاه‌ساز {BRAND_NAME} خوش آمدید
+                            به فروشگاه‌ساز خوش آمدید
                         </h1>
                         <p className="lg-subtitle">
                             {step === 'otp'
