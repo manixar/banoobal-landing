@@ -60,8 +60,6 @@ export default function ProductRing() {
                     <a
                         className="ss-ring__btn"
                         href={BRAND.ctaUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
                     >
                         {BRAND.ringButton}
                         <svg

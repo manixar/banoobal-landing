@@ -1,0 +1,378 @@
+/* ================= صفحه‌ی ورود ================= */
+.lg-root {
+    --lg-brand: #e0625a;        /* دکمه‌ها و رنگ اصلی */
+    --lg-brand-dark: #c94c44;   /* هاور دکمه */
+    --lg-brand-ink: #b8453c;    /* متن رنگی */
+    --lg-soft: #fde2df;
+    --lg-bg: #fffaf8;           /* پس‌زمینه‌ی کرمی */
+    --lg-ink: #1f1f1f;
+    --lg-muted: #7a7a7a;
+    --lg-line: #ece6e4;
+
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+    direction: rtl;
+    color: var(--lg-ink);
+    background: var(--lg-bg);
+}
+
+.lg-root *,
+.lg-root *::before,
+.lg-root *::after {
+    box-sizing: border-box;
+}
+
+.lg-root a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* ---------- هدر ---------- */
+.lg-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 20px;
+}
+
+.lg-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 18px;
+    font-weight: 900;
+    color: var(--lg-brand-ink) !important;
+}
+
+.lg-brand__icon {
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 9px;
+    background: var(--lg-soft);
+    color: var(--lg-brand);
+}
+
+.lg-support {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    color: var(--lg-brand-ink) !important;
+}
+
+/* ---------- بدنه ---------- */
+.lg-main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding: 8px 20px 24px;
+}
+
+.lg-form-side {
+    width: 100%;
+    max-width: 400px;
+}
+
+.lg-card {
+    display: flex;
+    flex-direction: column;
+}
+
+/* لوگوی بالای فرم */
+.lg-logo {
+    display: block;
+    width: 72px;
+    height: auto;
+    margin: 4px auto 20px; /* موبایل: وسط */
+}
+
+.lg-eyebrow {
+    display: none;
+    font-size: 12px;
+    color: var(--lg-brand);
+}
+
+.lg-title {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 900;
+    line-height: 1.6;
+}
+
+.lg-subtitle {
+    margin: 6px 0 22px;
+    font-size: 13px;
+    line-height: 1.9;
+    color: var(--lg-muted);
+}
+
+/* ---------- فرم ---------- */
+.lg-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.lg-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.lg-field {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.lg-label {
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.lg-input-wrap {
+    position: relative;
+    display: block;
+}
+
+.lg-input-icon {
+    position: absolute;
+    top: 50%;
+    right: 14px;
+    color: var(--lg-muted);
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.lg-input {
+    width: 100%;
+    height: 48px;
+    padding: 0 14px;
+    border: 1px solid var(--lg-line);
+    border-radius: 12px;
+    background: #fff;
+    font: inherit;
+    font-size: 14px;
+    color: var(--lg-ink);
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.lg-input--icon {
+    padding-right: 42px;
+}
+
+.lg-input::placeholder {
+    color: #b4b4b4;
+}
+
+.lg-input:focus {
+    outline: none;
+    border-color: var(--lg-brand);
+    box-shadow: 0 0 0 4px rgba(224, 98, 90, 0.12);
+}
+
+.lg-input[aria-invalid='true'] {
+    border-color: #d93025;
+}
+
+.lg-input--code {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 12px;
+}
+
+.lg-error {
+    margin: -4px 0 0;
+    font-size: 12px;
+    color: #d93025;
+}
+
+.lg-success {
+    margin: 0;
+    padding: 14px;
+    border-radius: 12px;
+    background: #e8f6ee;
+    color: #1e7a46;
+    font-size: 14px;
+    text-align: center;
+}
+
+.lg-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 50px;
+    margin-top: 4px;
+    border: 0;
+    border-radius: 12px;
+    background: var(--lg-brand);
+    color: #fff;
+    font: inherit;
+    font-size: 15px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.15s;
+}
+
+.lg-btn:hover {
+    background: var(--lg-brand-dark);
+}
+
+.lg-btn:active {
+    transform: scale(0.98);
+}
+
+.lg-btn:disabled {
+    opacity: 0.7;
+    cursor: wait;
+}
+
+.lg-link {
+    padding: 0;
+    border: 0;
+    background: none;
+    font: inherit;
+    font-weight: 800;
+    color: var(--lg-brand-ink);
+    cursor: pointer;
+}
+
+.lg-link:hover {
+    text-decoration: underline;
+}
+
+.lg-switch {
+    margin: 4px 0 0;
+    font-size: 13px;
+    text-align: center;
+    color: var(--lg-muted);
+}
+
+.lg-otp-actions {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+}
+
+.lg-timer {
+    color: var(--lg-muted);
+}
+
+/* ---------- امنیت و قوانین ---------- */
+.lg-trust {
+    margin-top: 26px;
+    font-size: 11px;
+    text-align: center;
+    color: var(--lg-muted);
+}
+
+.lg-trust p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin: 0 0 8px;
+}
+
+.lg-trust svg {
+    color: var(--lg-brand);
+}
+
+.lg-terms a {
+    color: var(--lg-brand-ink) !important;
+    font-weight: 700;
+}
+
+/* ---------- تصویر (فقط دسکتاپ) ---------- */
+.lg-hero {
+    display: none;
+}
+
+/* ---------- فوتر ---------- */
+.lg-footer {
+    display: none;
+}
+
+/* ================= دسکتاپ ================= */
+@media (min-width: 900px) {
+    .lg-header {
+        padding: 28px max(40px, calc((100% - 1200px) / 2));
+    }
+
+    .lg-main {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        gap: 64px;
+        width: 100%;
+        max-width: 1200px;
+        margin-inline: auto;
+        padding: 8px 40px 32px;
+    }
+
+    .lg-form-side {
+        justify-self: center;
+    }
+
+    .lg-logo {
+        width: 88px;
+        margin: 0 0 22px; /* دسکتاپ: هم‌تراز با متن، سمت راست */
+    }
+
+    .lg-eyebrow {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .lg-title {
+        font-size: 30px;
+        line-height: 1.55;
+    }
+
+    .lg-subtitle {
+        margin-bottom: 28px;
+    }
+
+    .lg-trust {
+        padding-top: 22px;
+        border-top: 1px solid var(--lg-line);
+    }
+
+    .lg-terms {
+        display: none !important;
+    }
+
+    .lg-hero {
+        display: block;
+        overflow: hidden;
+        aspect-ratio: 5 / 6;
+        border-radius: 32px;
+        background: var(--lg-soft);
+    }
+
+    .lg-hero img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 70% center; /* عکس افقی است؛ این عدد بخش دیده‌شده را جابه‌جا می‌کند */
+    }
+
+    .lg-footer {
+        display: flex;
+        justify-content: space-between;
+        padding: 20px max(40px, calc((100% - 1200px) / 2)) 28px;
+        font-size: 12px;
+        color: var(--lg-brand-ink);
+    }
+
+    .lg-footer__links {
+        display: flex;
+        gap: 20px;
+    }
+}

@@ -10,8 +10,6 @@ export default function PromoBanner({ isDesktop = false }) {
             <a
                 className="ss-banner"
                 href={BRAND.ctaUrl}
-                target="_blank"
-                rel="noopener noreferrer"
                 style={{
                     display: "block",
                     width: "calc(100% - 32px)",
@@ -50,8 +48,6 @@ export default function PromoBanner({ isDesktop = false }) {
                 <a
                     className="ss-promo__btn"
                     href={BRAND.ctaUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
                 >
                     {BRAND.promoButton}
                     <ChevronLeftIcon width={14} height={14} />

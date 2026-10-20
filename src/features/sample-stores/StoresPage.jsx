@@ -73,7 +73,7 @@ export default function StoresPage({ onBack = () => window.history.back() }) {
                     <h2>{BRAND.ctaTitle}</h2>
                     <p>{BRAND.ctaText}</p>
                     <div className="ss-cta-btn">
-                    <a href={BRAND.ctaUrl} target="_blank" rel="noopener noreferrer">
+                    <a href={BRAND.ctaUrl}>
                         {BRAND.ctaLabel}
                     </a>
                     <a href={BRAND.backUrl}>

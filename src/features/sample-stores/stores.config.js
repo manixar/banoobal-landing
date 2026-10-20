@@ -24,7 +24,7 @@ export const BRAND = {
     ctaText: 'با فروشگاه‌ساز بانوبال در چند قدم فروشگاه‌تان آماده می‌شود.',
     ctaLabel: 'ساخت فروشگاه',
     ctaBack: 'بازگشت به صفحه اصلی',
-    ctaUrl: 'https://paanapay.com/Auth/login',
+    ctaUrl: '#/login', // دکمه‌های ساخت فروشگاه → صفحه‌ی ورود
     backUrl: 'https://banoobal.com/',
 
     // سکشن حلقه‌ی محصولات
