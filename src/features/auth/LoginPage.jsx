@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './login.css';
 import { normalizeMobile, toEnglishDigits } from './phone';
-import { sendOtp, verifyOtp, completeUserInfo, DASHBOARD_URL } from './authApi';
+import { sendOtp, verifyOtp, completeUserInfo, PANAPAY_URL } from './authApi';
 import { BRAND } from '../sample-stores/stores.config';
 
 const BRAND_NAME = 'بانوشاپ';
@@ -58,13 +58,22 @@ export default function LoginPage() {
         return () => clearTimeout(id);
     }, [step, secondsLeft]);
 
-    // پایان کار: انتقال به پیشخوان پاناپی
+    // پایان کار: توکن را به صفحه‌ی callback پاناپی می‌دهیم تا آنجا ذخیره شود
+    // و کاربر بدون ورود دوباره به پیشخوان (یا ساخت فروشگاه) برود.
+    // توکن بعد از # است تا به سرور فرستاده نشود و در لاگ‌ها نماند.
     // (replace: دکمه‌ی Back دوباره به فرم کد برنمی‌گردد)
-    // TODO: تا وقتی پیشخوان صفحه‌ی دریافت توکن (callback) ندارد، کاربر ممکن است
-    // در پیشخوان دوباره لاگین بخواهد.
-    const finish = (redirectUrl) => {
+    const finish = (authToken, needsStoreInfo) => {
+        if (!authToken) {
+            setError('ورود کامل نشد؛ لطفاً دوباره تلاش کنید.');
+            setLoading(false);
+            return;
+        }
         setStep('done');
-        window.location.replace(redirectUrl || DASHBOARD_URL);
+        const params = new URLSearchParams({
+            token: authToken,
+            next: needsStoreInfo ? 'onboarding' : 'dashboard',
+        });
+        window.location.replace(`${PANAPAY_URL}/Auth/callback#${params}`);
     };
 
     // مرحله‌ی ۱: ارسال کد
@@ -109,7 +118,7 @@ export default function LoginPage() {
                 setStep('profile');
                 setLoading(false);
             } else {
-                finish(res.redirectUrl);
+                finish(res.token, res.needsStoreInfo);
             }
         } catch (err) {
             setError(err.message);
@@ -128,8 +137,8 @@ export default function LoginPage() {
 
         setLoading(true);
         try {
-            const res = await completeUserInfo({ token, firstName, lastName });
-            finish(res.redirectUrl);
+            const res = await completeUserInfo({ token, mobile, firstName, lastName });
+            finish(res.token, res.needsStoreInfo);
         } catch (err) {
             setError(err.message);
             setLoading(false);
