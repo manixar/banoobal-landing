@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './login.css';
 import { normalizeMobile, toEnglishDigits } from './phone';
-import { sendOtp, verifyOtp, DASHBOARD_URL } from './authApi';
+import { sendOtp, verifyOtp, completeUserInfo, DASHBOARD_URL } from './authApi';
 import { BRAND } from '../sample-stores/stores.config';
 
 const BRAND_NAME = 'بانوشاپ';
@@ -40,17 +40,16 @@ const ShieldIcon = (p) => (
 
 /* ---------- صفحه ---------- */
 export default function LoginPage() {
-    const [mode, setMode] = useState('login'); // 'login' | 'register'
-    const [step, setStep] = useState('mobile'); // 'mobile' | 'otp' | 'done'
+    // مراحل: شماره ← کد ← (فقط کاربر جدید) تکمیل اطلاعات ← انتقال به پیشخوان
+    const [step, setStep] = useState('mobile'); // 'mobile' | 'otp' | 'profile' | 'done'
     const [mobile, setMobile] = useState('');
+    const [code, setCode] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
-    const [code, setCode] = useState('');
+    const [token, setToken] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const [secondsLeft, setSecondsLeft] = useState(0);
-
-    const isRegister = mode === 'register';
 
     // شمارش معکوس برای «ارسال دوباره‌ی کد»
     useEffect(() => {
@@ -58,6 +57,15 @@ export default function LoginPage() {
         const id = setTimeout(() => setSecondsLeft((s) => s - 1), 1000);
         return () => clearTimeout(id);
     }, [step, secondsLeft]);
+
+    // پایان کار: انتقال به پیشخوان پاناپی
+    // (replace: دکمه‌ی Back دوباره به فرم کد برنمی‌گردد)
+    // TODO: تا وقتی پیشخوان صفحه‌ی دریافت توکن (callback) ندارد، کاربر ممکن است
+    // در پیشخوان دوباره لاگین بخواهد.
+    const finish = (redirectUrl) => {
+        setStep('done');
+        window.location.replace(redirectUrl || DASHBOARD_URL);
+    };
 
     // مرحله‌ی ۱: ارسال کد
     const handleSendCode = async (e) => {
@@ -69,20 +77,16 @@ export default function LoginPage() {
             setError('شماره موبایل معتبر نیست. مثال: ۰۹۱۲۳۴۵۶۷۸۹');
             return;
         }
-        if (isRegister && (!firstName.trim() || !lastName.trim())) {
-            setError('نام و نام خانوادگی را وارد کنید.');
-            return;
-        }
 
         setLoading(true);
         try {
-            const res = await sendOtp({ mobile: normalized, mode, firstName, lastName });
+            const res = await sendOtp({ mobile: normalized });
             setMobile(normalized);
             setCode('');
             setStep('otp');
-            setSecondsLeft(res.expiresIn ?? 120);
+            setSecondsLeft(res.expiresIn);
         } catch (err) {
-            setError(err.message || 'ارسال کد با خطا روبه‌رو شد.');
+            setError(err.message);
         } finally {
             setLoading(false);
         }
@@ -99,19 +103,37 @@ export default function LoginPage() {
 
         setLoading(true);
         try {
-            const res = await verifyOtp({ mobile, code, mode, firstName, lastName });
-            setStep('done');
-            // انتقال به پیشخوان پاناپی (replace: دکمه‌ی Back دوباره به فرم کد برنمی‌گردد)
-            window.location.replace(res.redirectUrl || DASHBOARD_URL);
+            const res = await verifyOtp({ mobile, code });
+            if (res.needsUserInfo) {
+                setToken(res.token);
+                setStep('profile');
+                setLoading(false);
+            } else {
+                finish(res.redirectUrl);
+            }
         } catch (err) {
-            setError(err.message || 'تأیید کد با خطا روبه‌رو شد.');
+            setError(err.message);
             setLoading(false);
         }
     };
 
-    const switchMode = () => {
-        setMode(isRegister ? 'login' : 'register');
+    // مرحله‌ی ۳: تکمیل اطلاعات (فقط کاربر جدید)
+    const handleProfile = async (e) => {
+        e.preventDefault();
         setError('');
+        if (!firstName.trim() || !lastName.trim()) {
+            setError('نام و نام خانوادگی را وارد کنید.');
+            return;
+        }
+
+        setLoading(true);
+        try {
+            const res = await completeUserInfo({ token, firstName, lastName });
+            finish(res.redirectUrl);
+        } catch (err) {
+            setError(err.message);
+            setLoading(false);
+        }
     };
 
     const editMobile = () => {
@@ -145,7 +167,7 @@ export default function LoginPage() {
                         />
 
                         <span className="lg-eyebrow">
-                            {isRegister ? 'ساخت حساب کاربری' : 'ورود به حساب کاربری'}
+                            {step === 'profile' ? 'تکمیل اطلاعات' : 'ورود یا ثبت‌نام'}
                         </span>
                         <h1 className="lg-title">
                             به فروشگاه‌ساز خوش آمدید
@@ -153,9 +175,9 @@ export default function LoginPage() {
                         <p className="lg-subtitle">
                             {step === 'otp'
                                 ? `کد ۶ رقمی ارسال‌شده به ${mobile} را وارد کنید.`
-                                : isRegister
-                                    ? 'برای ساخت فروشگاه، اطلاعات خود را وارد کنید.'
-                                    : 'برای ادامه، وارد حساب کاربری خود شوید.'}
+                                : step === 'profile'
+                                    ? 'حساب شما ساخته شد؛ برای ادامه نام خود را وارد کنید.'
+                                    : 'برای ورود یا ساخت حساب، شماره موبایل خود را وارد کنید.'}
                         </p>
 
                         {step === 'done' ? (
@@ -164,31 +186,6 @@ export default function LoginPage() {
                             </p>
                         ) : step === 'mobile' ? (
                             <form className="lg-form" onSubmit={handleSendCode} noValidate>
-                                {isRegister && (
-                                    <div className="lg-row">
-                                        <label className="lg-field">
-                                            <span className="lg-label">نام</span>
-                                            <input
-                                                className="lg-input"
-                                                value={firstName}
-                                                onChange={(e) => setFirstName(e.target.value)}
-                                                autoComplete="given-name"
-                                                maxLength={255}
-                                            />
-                                        </label>
-                                        <label className="lg-field">
-                                            <span className="lg-label">نام خانوادگی</span>
-                                            <input
-                                                className="lg-input"
-                                                value={lastName}
-                                                onChange={(e) => setLastName(e.target.value)}
-                                                autoComplete="family-name"
-                                                maxLength={255}
-                                            />
-                                        </label>
-                                    </div>
-                                )}
-
                                 <label className="lg-field">
                                     <span className="lg-label">شماره موبایل</span>
                                     <span className="lg-input-wrap">
@@ -210,16 +207,43 @@ export default function LoginPage() {
                                 {error && <p className="lg-error" role="alert">{error}</p>}
 
                                 <button className="lg-btn" type="submit" disabled={loading}>
-                                    {loading ? 'در حال ارسال…' : isRegister ? 'دریافت کد و ثبت‌نام' : 'ورود به حساب'}
+                                    {loading ? 'در حال ارسال…' : 'دریافت کد تأیید'}
                                     {!loading && <ArrowLeftIcon />}
                                 </button>
 
-                                <p className="lg-switch">
-                                    {isRegister ? 'حساب کاربری دارید؟' : 'حساب کاربری ندارید؟'}{' '}
-                                    <button type="button" className="lg-link" onClick={switchMode}>
-                                        {isRegister ? 'وارد شوید' : 'ثبت‌نام کنید'}
-                                    </button>
-                                </p>
+                            </form>
+                        ) : step === 'profile' ? (
+                            <form className="lg-form" onSubmit={handleProfile} noValidate>
+                                <div className="lg-row">
+                                    <label className="lg-field">
+                                        <span className="lg-label">نام</span>
+                                        <input
+                                            className="lg-input"
+                                            value={firstName}
+                                            onChange={(e) => setFirstName(e.target.value)}
+                                            autoComplete="given-name"
+                                            maxLength={255}
+                                            autoFocus
+                                        />
+                                    </label>
+                                    <label className="lg-field">
+                                        <span className="lg-label">نام خانوادگی</span>
+                                        <input
+                                            className="lg-input"
+                                            value={lastName}
+                                            onChange={(e) => setLastName(e.target.value)}
+                                            autoComplete="family-name"
+                                            maxLength={255}
+                                        />
+                                    </label>
+                                </div>
+
+                                {error && <p className="lg-error" role="alert">{error}</p>}
+
+                                <button className="lg-btn" type="submit" disabled={loading}>
+                                    {loading ? 'در حال ذخیره…' : 'ادامه و ورود به پیشخوان'}
+                                    {!loading && <ArrowLeftIcon />}
+                                </button>
                             </form>
                         ) : (
                             <form className="lg-form" onSubmit={handleVerify} noValidate>

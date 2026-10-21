@@ -8,4 +8,20 @@ export default defineConfig({
     react(),
     babel({ presets: [reactCompilerPreset()] })
   ],
+  server: {
+    proxy: {
+      // فقط برای توسعه (npm run dev): درخواست‌های /api به سرور پاناپی فرستاده می‌شوند،
+      // پس مرورگر خطای CORS نمی‌دهد. روی نسخه‌ی نهایی اثری ندارد.
+      '/api': {
+        target: 'https://api.paanapay.com',
+        changeOrigin: true,
+        configure: (proxy) => {
+          proxy.on('proxyReq', (proxyReq) => {
+            proxyReq.removeHeader('origin');
+            proxyReq.removeHeader('referer');
+          });
+        },
+      },
+    },
+  },
 })
