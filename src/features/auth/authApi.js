@@ -1,8 +1,7 @@
 const API_BASE = import.meta.env.DEV ? '' : 'https://api.paanapay.com';
 const SOURCE = 'banoobal';
 
-// آدرس پاناپی؛ بعد از ورود، توکن به صفحه‌ی /Auth/callback آن داده می‌شود
-// (لوکال: پروژه‌ی paanapay-web روی پورت 3000)
+
 export const PANAPAY_URL = import.meta.env.DEV ? 'http://localhost:3000' : 'https://paanapay.com';
 
 async function request(path, body, token) {
@@ -58,7 +57,7 @@ export async function verifyOtp({ mobile, code }) {
 }
 
 
-// کاربر جدید بعد از تایید کد هنوز توکن نداره؛ بک‌اند او را از روی mobile می‌شناسد
+
 export async function completeUserInfo({ token, mobile, firstName, lastName }) {
     const data = await request(
         '/api/store/auth/complete-user-info',
