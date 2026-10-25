@@ -99,6 +99,12 @@ export const STORES = [
         preview: 'stores/digitalshop.png',
     },
     {
+        name: 'گلدسیتو',
+        category: 'طلا و جواهر',
+        url: 'https://goldsito.paanapay.com',
+        preview: 'stores/goldsito.png',
+    },
+    {
         name: 'واچ‌لند',
         category: 'ساعت و اکسسوری',
         url: 'https://watchland.paanapay.com',
